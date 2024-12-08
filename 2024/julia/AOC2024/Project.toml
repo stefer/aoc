@@ -3,6 +3,12 @@ uuid = "ad5707c7-055d-486d-b81b-fd3dc22d6fde"
 authors = ["Stefan Eriksson <stefan.piaostefan@gmail.com>"]
 version = "0.1.0"
 
+[deps]
+DataStructures = "864edb3b-99cc-5e75-8d2d-829cb0a9cfe8"
+
+[compat]
+DataStructures = "0.18.20"
+
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
