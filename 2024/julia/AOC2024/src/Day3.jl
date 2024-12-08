@@ -12,32 +12,30 @@ end
 
 function run(input::String)
     context = Context(input, 1, Stack{Int}())
-    code!(context)
+    program!(context)
     return sum(context.stack)
 end
 
-function code!(ctx::Context)
+function program!(ctx::Context)
     while !at_end(ctx)
-        gibberish!(ctx)
-        call!(ctx)
+        corrupted!(ctx)
+        instruction!(ctx)
     end
 end
 
-function gibberish!(ctx::Context)
+function corrupted!(ctx::Context)
     while !at_end(ctx) && peek(ctx) != 'm'
         next!(ctx)
     end
 end
 
-function call!(ctx::Context)
-    if accept!(ctx, "mul") && accept!(ctx, "(")
-        if number!(ctx)
-            num1 = pop!(ctx.stack)
-            if accept!(ctx, ",") && number!(ctx) 
-                num2 = pop!(ctx.stack)
-                if accept!(ctx, ")")
-                    push!(ctx.stack, num1 * num2)
-                end
+function instruction!(ctx::Context)
+    if accept!(ctx, "mul") && accept!(ctx, "(") &&  number!(ctx)
+        num1 = pop!(ctx.stack)
+        if accept!(ctx, ",") && number!(ctx) 
+            num2 = pop!(ctx.stack)
+            if accept!(ctx, ")")
+                push!(ctx.stack, num1 * num2)
             end
         end
     end
